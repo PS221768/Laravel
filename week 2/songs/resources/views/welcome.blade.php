@@ -7,6 +7,8 @@
         <title>songs</title>
     </head>
     <body>
-
+        <script>
+            location.href = '/songs'
+        </script>
     </body>
 </html>

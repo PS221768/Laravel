@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
+use App\Models\Song;
 
-class SongColtroller extends Controller
+use PDO;
+
+class SongController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +16,8 @@ class SongColtroller extends Controller
      */
     public function index()
     {
-        //
+        $songs = Song::all();
+        return view('songs', ['songs' => $songs]);
     }
 
     /**
@@ -21,9 +25,24 @@ class SongColtroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function createview()
+    {
+        return view('createSong');
+    }
+
     public function create()
     {
-        //
+        error_log(request('soName'));
+        error_log(request('siName'));
+
+
+        $song = new Song();
+        $song->title=request('soName');
+        $song->singer=request('siName');
+        $done = $song->save();
+        if ($done) {
+            return "song has been added";
+        }else{ return "an error has occurt, please try again";}
     }
 
     /**
@@ -45,7 +64,8 @@ class SongColtroller extends Controller
      */
     public function show($id)
     {
-        //
+        $song = Song::find($id);
+        return view('song', ['song' => $song]);
     }
 
     /**
@@ -56,7 +76,9 @@ class SongColtroller extends Controller
      */
     public function edit($id)
     {
-        //
+        $songs = ['Living on a prayer', 'Nothing else matters', 'Thunderstruck', 'Back in black', 'Ace of spades'];
+        $song = array_key_exists($id, $songs) ?  $songs[$id] : "no songs found";
+        return view('editSong', ['song' => $song]);
     }
 
     /**

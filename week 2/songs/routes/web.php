@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\SongController;
+use \App\Http\Controllers\SongController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,9 @@ use app\Http\Controllers\SongController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/songs', [SongController::class, 'index'])->Name('songs');
+Route::get('songs/create', [SongController::class, 'createview'])->Name('create');
+Route::post('/songs/create', [SongController::class, 'create']);
+Route::get('songs/edit/{id}', [SongController::class, 'edit'])->Name('edit');
+Route::get('/songs/{id}', [SongController::class, 'show'])->Name('song');
