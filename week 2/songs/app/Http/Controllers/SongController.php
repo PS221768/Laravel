@@ -32,8 +32,6 @@ class SongController extends Controller
 
     public function create()
     {
-        error_log(request('soName'));
-        error_log(request('siName'));
 
 
         $song = new Song();
