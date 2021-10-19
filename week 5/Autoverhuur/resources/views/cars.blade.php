@@ -9,19 +9,13 @@
 <body>
 
     <?php
-        $i = 1;
         foreach($cars as $car){
             echo "<li>";
-            echo "<a href='cars/" . ($i) . "'>" . $car->merk . " " . $car->bouwjaar . "</a>"; 
+            echo "<a href='cars/" . ($car->id) . "'>" . $car->merk . " " . $car->bouwjaar . "</a>"; 
             echo "</li>";
-            $i += 1;
         }
 
 
     ?>
-
-
-
-
 </body>
 </html>
