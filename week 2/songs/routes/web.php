@@ -18,7 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/songs', [SongController::class, 'index'])->Name('songs');
-Route::get('songs/create', [SongController::class, 'createview'])->Name('create');
-Route::post('/songs/create', [SongController::class, 'create']);
+Route::get('songs/create', [SongController::class, 'createview'])->Name('create.show');
+Route::post('/songs/create', [SongController::class, 'create'])->Name('create');
+Route::put('songs/edit/{id}', [SongController::class, 'update'])->Name('update');
 Route::get('songs/edit/{id}', [SongController::class, 'edit'])->Name('edit');
+Route::delete('songs/delete/{id}', [SongController::class, 'destroy'])->Name('destroy');
 Route::get('/songs/{id}', [SongController::class, 'show'])->Name('song');

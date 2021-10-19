@@ -9,12 +9,10 @@
 <body>
 
     <?php
-        $i = 1;
         foreach($songs as $song){
             echo "<li>";
-            echo "<a href='songs/" . ($i) . "'>" . $song->title . "</a>"; 
+            echo "<a href='/songs/" . ($song->id) . "'>" . $song->title . " " . "</a>";
             echo "</li>";
-            $i += 1;
         }
 
 

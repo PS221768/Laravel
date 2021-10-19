@@ -7,17 +7,38 @@
     <title>Document</title>
 </head>
 <body>
+@isset($car)
+    <form action="/cars/edit/{{ $car->id }}" method="POST">
+        @method('PUT')
+        @csrf
+            <label for="merk">merk naam:</label><br>
+            <input id="merk" type="text" name="merk" value="{{ $car->merk }}"><br>
+            @error('merk')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <label for="type">type auto:</label><br>
+            <input id="type" type="text" name="type" value="{{ $car->type }}"><br>
+            @error('type')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <label for="bouwjaar">bouwjaar:</label><br>
+            <input id="bouwjaar" type="number" name="bouwjaar" value="{{ $car->bouwjaar }}"><br>
+            @error('bouwjaar')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <button type="submit">update</button>
+    </form>
 
-    {{ Form::open(array('url' => 'songs/create', 'method' => 'post')) }}
+    <form action="/cars/delete/{{ $car->id }}" method="POST">
+    @method('DELETE')
     @csrf
-        <label for="fname">merk naam:</label><br>
-        <input type="text" name="merk" value="{{ $car->merk }}"><br>
-        <label for="fname">type auto:</label><br>
-        <input type="text" name="type" value="{{ $car->type }}"><br>
-        <label for="fname">bouwjaar:</label><br>
-        <input type="number" name="bouwjaar" value="{{ $car->bouwjaar }}"><br>
-        <button type="submit">create</button>
-    {{ Form::close() }}
+        <button type="submit">delete</button>
+    </form>
+@endisset
+
+@empty($car)
+    <p>no car found with this id</p>
+@endempty
     
 </body>
 </html>

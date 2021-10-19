@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
+use App\Http\Requests\songsRequest;
 use App\Models\Song;
 
 use PDO;
@@ -30,16 +31,14 @@ class SongController extends Controller
         return view('createSong');
     }
 
-    public function create()
+    public function create(songsRequest $request)
     {
-
-
         $song = new Song();
-        $song->title=request('soName');
-        $song->singer=request('siName');
+        $song->title = $request->title;
+        $song->singer = $request->singer;
         $done = $song->save();
         if ($done) {
-            return "song has been added";
+            return "song has been created";
         }else{ return "an error has occurt, please try again";}
     }
 
@@ -74,9 +73,9 @@ class SongController extends Controller
      */
     public function edit($id)
     {
-        $songs = ['Living on a prayer', 'Nothing else matters', 'Thunderstruck', 'Back in black', 'Ace of spades'];
-        $song = array_key_exists($id, $songs) ?  $songs[$id] : "no songs found";
+        $song = Song::find($id);
         return view('editSong', ['song' => $song]);
+
     }
 
     /**
@@ -86,9 +85,16 @@ class SongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(songsRequest $request, $id)
     {
-        //
+        $song = Song::find($id);
+        $song->title = $request->title;
+        $song->singer = $request->singer;
+        $done = $song->save();
+        if ($done) {
+            return "song has been changed";
+        }else{ return "an error has occurt, please try again";}
+
     }
 
     /**
@@ -99,6 +105,10 @@ class SongController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $song = Song::find($id); 
+        $done = $song->delete();
+        if ($done) {
+            return "song has been deleted";
+        }else{ return "an error has occurt, please try again";}
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\carRequests;
 use Illuminate\Http\Request;
 use \App\Models\Car;
 class CarController extends Controller
@@ -36,10 +37,31 @@ class CarController extends Controller
         }else{ return "an error has occurt, please try again";}
     }
 
-    public function edit($id)
+    public function editview($id)
     {
         $car = Car::find($id);
-        return view('editSong', ['car' => $car]);
+        return view('editCar', ['car' => $car]);
+    }
+
+    public function edit(carRequests $request, $id)
+    {
+        $car = Car::find($id);
+        $car->merk = $request->merk;
+        $car->type = $request->type;
+        $car->bouwjaar = $request->bouwjaar;
+        $done = $car->save();
+        if ($done) {
+            return "car has been changed";
+        }else{ return "an error has occurt, please try again";}
+
+    }
+    
+    public function delete($id){
+        $car = Car::find($id); 
+        $done = $car->delete();
+        if ($done) {
+            return "car has been deleted";
+        }else{ return "an error has occurt, please try again";}
     }
     
 }

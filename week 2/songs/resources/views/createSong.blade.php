@@ -10,12 +10,18 @@
 
     {{ Form::open(array('url' => 'songs/create', 'method' => 'post')) }}
     @csrf
-        <label for="fname">Song name:</label><br>
-        <input type="text" name="soName"><br>
-        <label for="fname">Singer name:</label><br>
-        <input type="text" name="siName"><br>
+        <label for="title">Song name:</label><br>
+        <input id="title" type="text" name="title" required><br>
+        @error('title')
+            <div class="">{{ $message }}</div>
+        @enderror
+        <label for="singer">Singer name:</label><br>
+        <input id="singer" type="text" name="singer" required><br>
+        @error('singer')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <button type="submit">create</button>
     {{ Form::close() }}
-    
+
 </body>
 </html>

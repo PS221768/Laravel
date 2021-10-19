@@ -20,5 +20,7 @@ Route::get('/', [CarController::class, 'index']);
 Route::get('/cars', [CarController::class, 'index']);
 Route::get('/cars/create', [CarController::class, 'createview']);
 Route::post('/cars/create', [CarController::class, 'create']);
-Route::get('cars/edit/{id}', [CarController::class, 'edit']);
+Route::get('cars/edit/{id}', [CarController::class, 'editview']);
+Route::put('cars/edit/{id}', [CarController::class, 'edit']);
+Route::delete('cars/delete/{id}', [CarController::class, 'delete']);
 Route::get('/cars/{id}', [CarController::class, 'show']);
