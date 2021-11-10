@@ -57,8 +57,7 @@ class CarController extends Controller
     }
     
     public function delete($id){
-        $car = Car::find($id); 
-        $done = $car->delete();
+        $done = Car::destroy($id);
         if ($done) {
             return "car has been deleted";
         }else{ return "an error has occurt, please try again";}
