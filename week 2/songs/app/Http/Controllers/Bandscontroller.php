@@ -1,24 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\BandRequest as songsRequest;
+use App\Models\Band;
 
-use Illuminate\Support\Facades\Request;
-use App\Http\Requests\songsRequest;
-use App\Models\Song;
+use Illuminate\Http\Request;
 
-use PDO;
-
-class SongController extends Controller
+class Bandscontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $songs = Song::all();
-        return view('songs/songs', ['songs' => $songs]);
+        $bands = Band::all();
+        return view('bands/bands', ['bands' => $bands]);
     }
 
     /**
@@ -33,12 +26,13 @@ class SongController extends Controller
 
     public function create(songsRequest $request)
     {
-        $song = new Song();
-        $song->title = $request->title;
-        $song->singer = $request->singer;
-        $done = $song->save();
+        $band = new Band();
+        $band->name = $request->name;
+        $band->founded = $request->founded;
+        $band->active_till = $request->active_till;
+        $done = $band->save();
         if ($done) {
-            return "song has been created";
+            return "band has been created";
         }else{ return "an error has occurt, please try again";}
     }
 
@@ -61,8 +55,8 @@ class SongController extends Controller
      */
     public function show($id)
     {
-        $song = Song::find($id);
-        return view('songs/song', ['song' => $song]);
+        $band = Band::find($id);
+        return view('bands/band', ['band' => $band]);
     }
 
     /**
@@ -73,8 +67,8 @@ class SongController extends Controller
      */
     public function edit($id)
     {
-        $song = Song::find($id);
-        return view('songs/editSong', ['song' => $song]);
+        $band = Band::find($id);
+        return view('songs/editBands', ['band' => $band]);
 
     }
 
@@ -87,12 +81,12 @@ class SongController extends Controller
      */
     public function update(songsRequest $request, $id)
     {
-        $song = Song::find($id);
-        $song->title = $request->title;
-        $song->singer = $request->singer;
-        $done = $song->save();
+        $band = Band::find($id);
+        $band->title = $request->title;
+        $band->singer = $request->singer;
+        $done = $band->save();
         if ($done) {
-            return "song has been changed";
+            return "band has been changed";
         }else{ return "an error has occurt, please try again";}
 
     }
@@ -105,10 +99,10 @@ class SongController extends Controller
      */
     public function destroy($id)
     {
-        $song = Song::find($id); 
-        $done = $song->delete();
+        $band = Band::find($id); 
+        $done = $band->delete();
         if ($done) {
-            return "song has been deleted";
+            return "band has been deleted";
         }else{ return "an error has occurt, please try again";}
     }
 }

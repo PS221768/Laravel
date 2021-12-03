@@ -11,7 +11,7 @@
     <?php
         foreach($songs as $song){
             echo "<li>";
-            echo "<a href='/songs/" . ($song->id) . "'>" . $song->title . " " . "</a>";
+            echo "<a href='songs/songs/" . ($song->id) . "'>" . $song->title . " " . "</a>";
             echo "</li>";
         }
 
