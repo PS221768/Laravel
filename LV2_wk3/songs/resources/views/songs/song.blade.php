@@ -7,12 +7,12 @@
     <title>song</title>
 </head>
 <body>
-@isset($band)
-    <p> {{ $band->name }} - {{ $band->singer }} </p>
+@isset($song)
+    <p> {{ $song->title }} - {{ $song->singer }} </p>
 @endisset
 
-@empty($band)
-    <p>no band found with this id</p>
+@empty($song)
+    <p>no song found with this id</p>
 @endempty
     
 </body>
